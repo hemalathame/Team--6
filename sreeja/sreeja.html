@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            /* font-family: ; */
+            /* font-variant: small-caps; */
+        }
+        body{
+            display: flex;
+            justify-content: center;
+            margin: 100px auto;
+        }
+        .container{
+            height: max-content;
+            width: 400px;
+            border: 3px double;
+            border-radius: 15px;
+            padding: 10px;            
+        }
+        .datesection{
+            height: max-content;
+            width: 90%;
+            border: solid ;
+            padding: 20px;
+            margin: 40px auto;
+            border-radius: 8px;
+        }
+        .timesection{
+            height: max-content;
+            width: 90%;
+            border: solid ;
+            padding: 20px;
+            margin: 40px auto;
+            border-radius: 8px;   
+        }
+         
+        .datesection > span{
+            margin-left:30px ;
+            align-items: center;
+            font-size: 25px;
+        }
+        .timesection > span{
+            margin-left:25px ;
+            align-items: center;
+            font-size: 25px;  
+        }
+        
+        .datebox {
+           width: 100%;
+           height: max-content;
+           margin-bottom: 0px;
+           border-radius: 10px;
+           padding: 0px 20px 0px 20px;
+           border: solid;
+           display: flex;
+           text-align: center;
+           justify-content: space-around;
+        }
+        .timebox{
+           width: 100%;
+           height: max-content;
+           margin-bottom: 0px;
+           border-radius: 10px;
+           border: solid;
+           display: flex;
+           text-align: center;
+           justify-content: space-around;   
+           padding:0px 45px 0px 10px;           
+        }
+        .datebox span{
+            font-size: 40px;
+            font-weight: bold;
+            height: 100%;
+        }
+        .timebox span{
+            font-size: 40px;
+            font-weight: bold;
+            height: 100%;    
+        }
+        .timesection{
+            position: relative;
+        }
+        aside{
+            position: absolute;
+            /* border: solid; */
+            right: 20px;
+            bottom: 20px;
+            height: 55px;
+            width: 40px;
+            text-align: center;
+            /* border-radius:0px  10px 10px 0px;    */
+            
+        }
+        .am{
+            position: absolute;
+            right: 10px;
+            top: 8px;
+        }
+        .pm{
+            position: absolute;
+            bottom: 8px;
+            right: 10px;
+            /* left: 10px; */
+        }
+
+        .daysection{
+            border: 0.2px solid;
+            display: flex;
+            justify-content: space-around;
+            font-weight: bold;
+            margin-top: 10px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <div class="container">
+            <section class="daysection">
+                <span class="day">SUN</span>
+                <span class="day">MON</span>
+                <span class="day">TUE</span>
+                <span class="day">WED</span>
+                <span class="day">THU</span>
+                <span class="day">FRI</span>
+                <span class="day">SAT</span>
+            </section>
+            <section class="datesection">
+                    <span class="dayname">date</span>
+                    <span>month</span>
+                    <span>year</span>
+                <div class="datebox">
+                    <span class="date"></span>
+                    <span class="month"></span>
+                    <span class="year"></span> 
+                </div>
+            </section>
+            <section class="timesection">
+                <span>hours</span> 
+                <span>min</span> 
+                <span>sec</span> 
+                <div class="timebox">
+                    <span class="hours"></span> 
+                    <span class="minutes"></span> 
+                    <span class="seconds"></span> 
+                </div>
+                <aside>
+                    <span class="am">AM</span>
+                    <span class="pm">PM</span>
+                </aside>
+            </section>
+            
+        </div>
+    </main>
+
+
+
+
+<script>
+
+    document.addEventListener("DOMContentLoaded",function(){
+        function timeset(){
+            const now=new Date()
+            const presenthours=now.getHours()
+            const presentminutes=now.getMinutes()
+            const presentseconds=now.getSeconds()
+
+            monthsnames=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"]
+            daysnames=["sun","mon","tue","wed","thu","fri","sat"]
+            const presentdate=now.getDate()
+            const presentmonth=now.getMonth()
+            const presentyear=now.getFullYear()
+        //    const presentday=now.getDay()
+
+        //    const day=document.querySelector("dayname")
+            const date=document.querySelector(".date");
+            const month=document.querySelector(".month");
+            const year=document.querySelector(".year");
+
+
+            const hours=document.querySelector(".hours");
+            const minutes=document.querySelector(".minutes");
+            const seconds=document.querySelector(".seconds");
+
+            const am=document.querySelector(".am");
+            const pm=document.querySelector(".pm");
+
+            // days section
+            const dayname=document.getElementsByClassName("day")[now.getDay()];
+            dayname.style.color="red";
+            dayname.style.fontweight="bold";
+
+            //date section
+            date.textContent=presentdate
+            month.textContent=monthsnames[presentmonth]
+            year.textContent=presentyear
+            //day.textContent=daysnames[presentday]
+            
+            //time section
+            hours.textContent=presenthours+":"
+            minutes.textContent=presentminutes+" "+":"
+            seconds.textContent=presentseconds
+
+           if(presenthours >=12){
+              am.style.display="none" ;
+           }else{
+              pm.style.display="none" ;  
+           }
+
+            // const time=document.querySelector(".timebox");
+            // time.textContent=now.toLocaleTimeString();
+ 
+
+        }
+        setInterval(timeset,1000)
+    })
+</script>
+</body>
+</html> 
